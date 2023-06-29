@@ -1,18 +1,23 @@
-const Name = ({person}) => {
+const Name = ({person, deletePerson}) => {
 	//console.log('Name')
   return(
-	  <p>{person.name} {person.number}</p>
+	  <p>{person.name} {person.number}
+      <button onClick={() => deletePerson(person.id)}>delete</button>
+    </p>
 	)
 }
 
-const Persons = ({personsToShow}) => {
-    return(
-      <div>
-        {personsToShow.map(person =>
-          < Name key={person.name} person={person} />
-        )}
-      </div>
-    )
+const Persons = ({personsToShow, deletePerson}) => {
+
+  //console.log("personsToShow", personsToShow)
+  return(
+    <div>
+      {personsToShow.map((person, i) =>
+        < Name key={i} person={person} deletePerson={deletePerson} />
+      )}
+    </div>
+  )
 }
+
 
 export default Persons
