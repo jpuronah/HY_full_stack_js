@@ -7,17 +7,14 @@ const Name = ({person, deletePerson}) => {
 	)
 }
 
-const Persons = ({personsToShow, deletePerson}) => {
-
-  //console.log("personsToShow", personsToShow)
+const Persons = ({persons, deletePerson}) => {
   return(
     <div>
-      {personsToShow.map((person, i) =>
+      {persons.map((person, i) =>
         < Name key={i} person={person} deletePerson={deletePerson} />
       )}
     </div>
   )
 }
-
 
 export default Persons
