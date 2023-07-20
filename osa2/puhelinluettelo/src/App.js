@@ -14,11 +14,13 @@ const App = () => {
   const [showAll] = useState(true)
   const [notification, setNotification] = useState('')
   const [notificationType, setNotificationType] = useState(-10)
+  const baseUrl = 'https://puhback.fly.dev/api/persons'
 
   const hook = () => {
     console.log('effect')
     axios
-      .get('http://localhost:3001/persons')
+      //.get('http://localhost:3001/api/persons')
+      .get(`${baseUrl}`)
       .then(response => {
         setPersons(response.data)
       })
@@ -101,7 +103,8 @@ const App = () => {
     if (confirmed) {
       // Remove new person
       axios
-        .delete(`http://localhost:3001/persons/${props}`)
+        //.delete(`http://localhost:3001/api/persons/${props}`)
+        .delete(`${baseUrl}/${props}`)
         .then(response => {
           setPersons(persons.filter(person => person.id !== props))
 
@@ -110,7 +113,7 @@ const App = () => {
         setNotificationType(-1)
         setTimeout(() => {
           setNotificationType(-10)
-        }, 3000)
+        }, 5000)
         })
       .catch(() => {
         setNotification(personToDelete.name)
@@ -128,6 +131,9 @@ const App = () => {
 
   const filterPersons = persons.filter(person => {
     // Filter person list
+    if (!searchInput) {
+      return true;
+    }
     console.log("searchInput", searchInput)
     return person.name.includes(searchInput)
   });
